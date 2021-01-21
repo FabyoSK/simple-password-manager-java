@@ -3,8 +3,12 @@ package com.fabyosk;
 import java.io.*;
 
 public class FileManager {
+    private String file;
+    public FileManager(String file) {
+        this.file = file;
+    }
 
-    private String readFileByLine(String file) throws IOException, IOException {
+    public String addPassword(String pass) throws IOException, IOException {
 
         // create a new file reader
         FileReader reader = new FileReader(file);
@@ -17,22 +21,23 @@ public class FileManager {
 
         // using the buffered reader we can read lines
         while ((line = bReader.readLine()) != null) {
-            continue;
+            result += line + "\n";
         }
+        bReader.close();
+        result += pass + "\n";
 
         // create a new file writer
         FileWriter writer = new FileWriter(file);
 
         // wrap the file writer using a buffered writer
         BufferedWriter bWriter = new BufferedWriter(writer);
-.
+
         //add text to buffer
-        bWriter.write(password);
+        bWriter.write(result);
 
         bWriter.flush(); // if the buffer is not full, flush will force disk write
         bWriter.close();
 
-        bReader.close();
 
         return result;
     }
