@@ -1,6 +1,5 @@
 package com.fabyosk;
 
-
 public class PasswordHash {
     public String encrypt(String str){
         int code;
