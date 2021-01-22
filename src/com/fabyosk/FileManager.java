@@ -4,6 +4,8 @@ import java.io.*;
 
 public class FileManager {
     private String file;
+    private PasswordHash passwordHash = new PasswordHash();
+
     public FileManager(String file) {
         this.file = file;
     }
@@ -24,7 +26,7 @@ public class FileManager {
             result += line + "\n";
         }
         bReader.close();
-        result += pass + "\n";
+        result += passwordHash.encrypt(pass);
 
         // create a new file writer
         FileWriter writer = new FileWriter(file);
@@ -40,5 +42,23 @@ public class FileManager {
 
 
         return result;
+    }
+    public void toTerminal() throws IOException {
+        // create a new file reader
+        FileReader reader = new FileReader(file);
+
+        // wrap the file reader using a buffered reader
+        BufferedReader bReader = new BufferedReader(reader);
+
+        String line = "";
+        String result = "";
+
+        // using the buffered reader we can read lines
+        while ((line = bReader.readLine()) != null) {
+            result += passwordHash.decrypt(line) + "\n";
+
+        }System.out.println(result);
+        bReader.close();
+
     }
 }

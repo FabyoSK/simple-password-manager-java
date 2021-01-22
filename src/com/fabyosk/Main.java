@@ -9,11 +9,7 @@ public class Main {
         f.addPassword("Something");
 
         PasswordHash passwordHash = new PasswordHash();
-
-        String a = passwordHash.encrypt("something");
-        System.out.println(a);
-        String b = passwordHash.decrypt(a);
-        System.out.println(b);
+        f.toTerminal();
 
     }
 }

@@ -1,27 +1,7 @@
 package com.fabyosk;
 
-import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
 public class PasswordHash {
-    private String secret = "fsksssss";
-    private String password = "ILoveJava";
-
-
-    String myIpValue = "192.168.0.1";
-public PasswordHash(){
-
-}
-    public void encrygpt(String string) {
-        String seed = "ipNumber";
-        String myIpValue = "192.168.0.1";
-
-        StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-        encryptor.setPassword(seed);
-        String encrypted= encryptor.encrypt(myIpValue);
-
-        System.out.println(encrypted);
-
-    }
     public String encrypt(String str){
         int code;
         String result = "";
@@ -41,6 +21,5 @@ public PasswordHash(){
         }
         return result;
     }
-
 
 }
