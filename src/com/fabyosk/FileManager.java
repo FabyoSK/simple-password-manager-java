@@ -5,7 +5,7 @@ import java.io.*;
 public class FileManager {
     private String file;
     private PasswordHash passwordHash = new PasswordHash();
-
+    private String currentUser;
     public FileManager(String file) {
         this.file = file;
     }
@@ -49,5 +49,53 @@ public class FileManager {
         System.out.println(result);
         bReader.close();
 
+    }
+
+    public void createUser(String user, String pass) throws IOException {
+        FileReader reader = new FileReader("users.txt");
+        BufferedReader bReader = new BufferedReader(reader);
+
+        String line = "";
+        String result = "";
+
+        // using the buffered reader we can read lines
+        while ((line = bReader.readLine()) != null) {
+            result += line + "\n";
+        }
+        bReader.close();
+        result += user + ":" + pass;
+        result = result.trim();
+
+        FileWriter writer = new FileWriter("users.txt");
+        BufferedWriter bWriter = new BufferedWriter(writer);
+
+        bWriter.write(result);
+        bWriter.flush();
+        bWriter.close();
+    }
+
+    public String getCurrentUser() {
+        return currentUser;
+    }
+
+    public boolean login(String user, String pass) throws IOException {
+        FileReader reader = new FileReader("users.txt");
+        BufferedReader bReader = new BufferedReader(reader);
+
+        String line = "";
+        String result = "";
+
+        // using the buffered reader we can read lines
+        while ((line = bReader.readLine()) != null) {
+            String[] credencials = line.split(":");
+            if (credencials[0].equals(user) && credencials[1].equals(pass)) {
+                currentUser = credencials[0];
+                bReader.close();
+                return true;
+            }
+            result += line + "\n";
+        }
+        bReader.close();
+        return false;
     }
 }
