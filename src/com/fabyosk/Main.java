@@ -86,7 +86,7 @@ public class Main {
                 case 1:
                     System.out.print("Type a new password to add: ");
                     Scanner password = new Scanner(System.in);
-                    manager.addPassword(password.next());
+                    manager.addPassword(user, password.next());
                     System.out.println("Password added succesfully\n");
                     break;
                 case 2:
